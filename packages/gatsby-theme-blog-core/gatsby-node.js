@@ -52,6 +52,7 @@ exports.createSchemaCustomization = ({ actions, schema }, themeOptions) => {
   createTypes(`interface BlogPost @nodeInterface {
       id: ID!
       title: String!
+      canonical: String
       body: String!
       slug: String!
       date: Date! @dateformat
@@ -74,6 +75,9 @@ exports.createSchemaCustomization = ({ actions, schema }, themeOptions) => {
         },
         slug: {
           type: `String!`,
+        },
+        canonical: {
+          type: `String`,
         },
         date: { type: `Date!`, extensions: { dateformat: {} } },
         tags: { type: `[String]!` },
@@ -203,6 +207,7 @@ exports.onCreateNode = async (
     const fieldData = {
       title: node.frontmatter.title,
       tags: node.frontmatter.tags || [],
+      canonical: node.frontmatter.canonical,
       slug,
       date: node.frontmatter.date,
       image: node.frontmatter.image,

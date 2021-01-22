@@ -26,6 +26,7 @@ export const query = graphql`
       slug
       title
       tags
+      canonical
       date(formatString: "MMMM DD, YYYY")
       image {
         childImageSharp {
